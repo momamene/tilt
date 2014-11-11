@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
+<polymer-element name="game-tile" attributes="" extends="paper-fab">
+  <template>
+    <link rel="stylesheet" href="game-tile.css">
+    <shadow></shadow>
+  </template>
+  <script>
+   (function () {
+     'use strict';
+
+     Polymer({
+       mass: 5,
+       created: function() {
+         window.addEventListener('deviceorientation', this.onTilt.bind(this));
+       },
+       onTilt: function(eventData) {
+         // gamma is the left-to-right tilt in degrees, where right is positive
+         // beta is the front-to-back tilt in degrees, where front is positive
+         // alpha is the compass direction the device is facing in degrees
+         this.tiltInfo = eventData;
+         this.style.top = parseInt(this.tiltInfo.beta / this.mass) + 'px';
+         this.style.left = parseInt(this.tiltInfo.gamma / this.mass) + 'px';
+       }
+     });
+
+   })();
+  </script>
+</polymer-element>

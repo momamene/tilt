@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../game-tile/game-tile.html">
+
+<polymer-element name="game-board" attributes="size">
+  <template>
+    <link rel="stylesheet" href="game-board.css">
+    <template repeat="{{ i in size_range }}" vertical layout>
+      <template repeat="{{ j in size_range }}" horizontal layout>
+        <game-tile>
+        </game-tile>
+      </template>
+    </template>
+  </template>
+  <script src="../../bower_components/underscore/underscore.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        created: function() {
+          // hint that items is an array
+          this.size_range = _.range(this.attributes.size.value);
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>
